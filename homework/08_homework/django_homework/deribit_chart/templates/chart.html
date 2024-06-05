@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTC-PERPETUAL-Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script> <!-- Hammer.js für Zoom und Pan -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script> <!-- Moment.js for time-axis -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script> <!-- Moment.js for time-axis -->
+</head>
+<body>
+    <h1>BTC-PERPETUAL-Chart</h1>
+    <div style="width: 75%; margin: auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        // fetch Data
+        async function fetchData() {
+            const response = await fetch('/api/deribit');
+            const data = await response.json();
+            return data;
+        }
+
+        // create Chart
+        function createChart(dataFromAPI) {
+            const labels = dataFromAPI.map(data => new Date(data.date));
+            const openPrices = dataFromAPI.map(data => data.open);
+            const closePrices = dataFromAPI.map(data => data.close);
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Open Price',
+                            data: openPrices,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            fill: false,
+                            borderWidth: 1,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Close Price',
+                            data: closePrices,
+                            borderColor: 'rgba(153, 102, 255, 1)',
+                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                            fill: false,
+                            borderWidth: 1,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                parser: 'YYYY-MM-DD',
+                                tooltipFormat: 'DD.MM.YYYY HH:mm',
+                                displayFormats: {
+                                    day: 'DD.MM.YYYY'
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            },
+                            ticks: {
+                                autoSkip: false,
+                                maxTicksLimit: 10 // Reducing number ob dates on Axis
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Price'
+                            }
+                        }
+                    },
+                    plugins: {
+                        zoom: {
+                            pan: {
+                                enabled: true,
+                                mode: 'x',
+                                speed: 10,
+                                threshold: 10
+                            },
+                            zoom: {
+                                wheel: {
+                                    enabled: true,
+                                },
+                                pinch: {
+                                    enabled: true
+                                },
+                                mode: 'x'
+                            }
+                        }
+                    },
+                    tooltips: {
+                        callbacks: {
+                            title: function(tooltipItems, data) {
+                                return tooltipItems[0].label.toLocaleDateString('de-DE') + ' ' + tooltipItems[0].label.toLocaleTimeString('de-DE');
+                            },
+                            label: function(tooltipItem, data) {
+                                return 'Price: ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Daten holen und Chart erstellen
+        fetchData().then(dataFromAPI => {
+            createChart(dataFromAPI);
+        }).catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    </script>
+</body>
+</html>
