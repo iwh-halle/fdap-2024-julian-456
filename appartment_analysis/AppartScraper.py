@@ -4,6 +4,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
+# class for scraping a specific appartment
 class AppartScraper():
     def __init__(self, soup, url):
         self.result_dict = {url: url}
@@ -44,17 +45,17 @@ class AppartScraper():
          
     
     def get_base_info(self):
-        title = soup.find('h1', class_='headline headline-detailed-view-title').text
+        title = self.soup.find('h1', class_='headline headline-detailed-view-title').text
         title = title.replace('\n', '').strip()
         self.result_dict.update({'Title': title})
 
-        size = soup.find('b', class_='key_fact_value').text
+        size = self.soup.find('b', class_='key_fact_value').text
         size = size.replace('\n', '').strip()
         self.result_dict.update({'Size': size})
         
     
     def get_price(self):
-        cost_panel = soup.find_all('div', class_='panel section_panel')[1]
+        cost_panel = self.soup.find_all('div', class_='panel section_panel')[1]
 
         rent = cost_panel.find_all('span', class_='section_panel_value')[0].text
         rent = rent.replace('\n', '').strip()
@@ -78,7 +79,7 @@ class AppartScraper():
         
     
     def get_address(self):
-        address_panel = soup.find_all('div', class_='panel section_panel')[2]
+        address_panel = self.soup.find_all('div', class_='panel section_panel')[2]
 
         address = address_panel.find_all('span', class_='section_panel_detail')[0].text
         address = ' '.join(address.split())
@@ -86,7 +87,7 @@ class AppartScraper():
         
     
     def get_availability(self):
-        address_panel = soup.find_all('div', class_='panel section_panel')[2]
+        address_panel = self.soup.find_all('div', class_='panel section_panel')[2]
         available_from = address_panel.find_all('span', class_='section_panel_value')[0].text
         available_from = available_from.replace('\n', '').strip()
         self.result_dict.update({'Available_From': available_from})
@@ -106,7 +107,7 @@ class AppartScraper():
         self.result_dict.update({'Available_Till': available_till, 'Online_Since': online_since})
     
     def get_search_info(self):
-        headline = soup.find('h4', class_='headline pb0', string = re.compile(r'Gesucht wird:'))
+        headline = self.soup.find('h4', class_='headline pb0', string = re.compile(r'Gesucht wird:'))
         # Finde das nächste span-Element mit der Klasse "section_panel_detail" nach der Überschrift
         if headline:
             section_detail = headline.find_next('span', class_='section_panel_detail')
@@ -121,7 +122,7 @@ class AppartScraper():
             self.result_dict.update({'Search_Info': np.nan})
     
     def get_icons(self):
-        headline = soup.find('div', class_='utility_icons')
+        headline = self.soup.find('div', class_='utility_icons')
         if headline:
             feature_set = set()
             features = headline.find_all('div', class_='text-center')
@@ -136,7 +137,7 @@ class AppartScraper():
             print("Es wurden keine Features gefunden.")
     
     def get_docs(self):
-        headline = soup.find('h3', class_='headline section_panel_title', string = re.compile(r'Benötigte Unterlagen'))
+        headline = self.soup.find('h3', class_='headline section_panel_title', string = re.compile(r'Benötigte Unterlagen'))
 
         # Finde das nächste span-Element mit der Klasse "section_panel_detail" nach der Überschrift
         if headline:
@@ -153,25 +154,27 @@ class AppartScraper():
             
         else:
             print("No documents needed.")
+
+    
     
     
 
     
     
 
-url_shared_app = "https://www.wg-gesucht.de/wg-zimmer-in-Koeln-Agnesviertel.8024813.html" 
-response = requests.get(url_shared_app, allow_redirects=False)
-soup = BeautifulSoup(response.text, 'html.parser')
+# url_shared_app = "https://www.wg-gesucht.de/wg-zimmer-in-Koeln-Agnesviertel.8024813.html" 
+# response = requests.get(url_shared_app, allow_redirects=False)
+# soup = BeautifulSoup(response.text, 'html.parser')
 
-test = AppartScraper(soup, url_shared_app)
-test.get_flatmates()
-test.get_base_info()
-test.get_price()
-test.get_address()
-test.get_availability()
-test.get_search_info()
-test.get_icons()
-test.get_docs()
+# test = AppartScraper(soup, url_shared_app)
+# test.get_flatmates()
+# test.get_base_info()
+# test.get_price()
+# test.get_address()
+# test.get_availability()
+# test.get_search_info()
+# test.get_icons()
+# test.get_docs()
 
-print(test.result_dict)
-# test.result_df.head()
+# print(test.result_dict)
+# # test.result_df.head()
