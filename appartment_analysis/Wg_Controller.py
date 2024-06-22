@@ -60,7 +60,7 @@ class Wg_Controller():
     def get_app_info(self):
         scraper = Scraper()
         for page, links in self.non_spons_links.items():
-            if int(page) > 2: # first 2 pages
+            if int(page) > 35: # first 35 pages
                 break
   
             for link in links:
