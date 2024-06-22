@@ -7,11 +7,12 @@ from bs4 import BeautifulSoup
 # class for scraping a specific appartment
 class AppartScraper():
     def __init__(self, soup, url):
-        self.result_dict = {url: url}
+        self.result_dict = {} # self.result_dict = {url: url}
         self.soup = soup
     
     def get_flatmates(self):
         flatmate_span = self.soup.find('span', class_='mr5')
+        # print(flatmate_span)
         flatmate_title = flatmate_span['title']
 
         # Regular expression to find the size of the WG (e.g., "3er WG")
@@ -154,6 +155,74 @@ class AppartScraper():
             
         else:
             print("No documents needed.")
+    
+    def get_wg_details(self):
+        detail_list = []
+        detail_dic = {}
+        details = self.soup.find_all('ul', class_='pl15 mb15')
+        for detail in details:
+            spans = detail.find_all('span')
+            detail_list.extend(spans)
+        details
+
+        for span in detail_list:
+            span = span.text.replace('\n', '').strip()
+            span = re.sub(r'\s+', ' ', span)
+            
+            if 'rauchen' in span.lower():
+                detail_dic.update({'Rauchen': span}) 
+            
+            if 'alter' in span.lower():
+                detail_dic.update({'Alter': span})
+            
+            if 'wohnungsgröße' in span.lower():
+                detail_dic.update({'Wohnungsgröße': span})
+            
+            if 'sprache/n' in span.lower():
+                detail_dic.update({'Sprache/n': span})
+            
+            if ('zweck-wg'  in span.lower()) or ('zweck wg' in span.lower()) or ('zweckgemeinschaft' in span.lower()):
+                detail_dic.update({'Zweck-WG': 1})
+
+            if ('frauen-wg' in span.lower()) or ('frauen wg' in span.lower()) or ('mädels wg' in span.lower()) or ('mädels-wg' in span.lower()):
+                detail_dic.update({'Frauen-WG': 1})
+            
+            if ('männer-wg' in span.lower()) or ('männer wg' in span.lower()) or ('jungs wg' in span.lower()) or ('jungs-wg' in span.lower()):
+                detail_dic.update({'Männer-WG': 1})
+            
+            if ('berufstätigen-wg' in span.lower()) or ('berufstätigen wg' in span.lower()) or ('berufstätige wg' in span.lower()) or ('berufstätige-wg' in span.lower()):
+                detail_dic.update({'Berufstätigen-WG': 1})
+            
+            if ('gemischte wg' in span.lower()) or ('gemischte-wg' in span.lower()):
+                detail_dic.update({'gemischte-WG': 1})
+
+            if ('studenten-wg' in span.lower()) or ('studenten wg' in span.lower()) or ('studentinnen wg' in span.lower()) or ('studentinnen-wg' in span.lower()):
+                detail_dic.update({'Studenten-WG': 1})
+            
+            if ('keine zweck-wg' in span.lower()) or ('keine zweck wg' in span.lower()) or ('keine zweckgemeinschaft' in span.lower()):
+                detail_dic.update({'Zweck-WG': 0})
+            
+            if ('verbindung' in span.lower()):
+                detail_dic.update({'Verbindung': 1})
+
+            if('azubi-wg' in span.lower()) or ('azubi wg' in span.lower()) or ('azubis wg' in span.lower()) or ('azubis-wg' in span.lower()):
+                detail_dic.update({'Azubi-WG': 1})
+            
+            if ('lgbtq' in span.lower()) or ('queer' in span.lower()):
+                detail_dic.update({'LGBTQ': 1})
+
+        self.result_dict.update(detail_dic)
+    
+    def get_all(self):
+        self.get_flatmates()
+        self.get_base_info()
+        self.get_price()
+        self.get_address()
+        self.get_availability()
+        self.get_search_info()
+        self.get_icons()
+        self.get_docs()
+        self.get_wg_details()
 
     
     

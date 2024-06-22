@@ -10,6 +10,8 @@ class Wg_Controller():
     def __init__(self):
         self.non_spons_links = {}
         self.appart_dict = {}
+        self.skipped_links = []
+        self.failed_links = []
     
     def get_non_spons_links(self, url, start, stop):
         """
@@ -58,17 +60,28 @@ class Wg_Controller():
     def get_app_info(self):
         scraper = Scraper()
         for page, links in self.non_spons_links.items():
-            if int(page) > 1:
+            if int(page) > 2: # first 2 pages
                 break
-    
+  
             for link in links:
                 new_link = 'https://www.wg-gesucht.de' + link
                 response = scraper.get_page(new_link)
-                soup = BeautifulSoup(response.text, 'html.parser')
-                appart_scraper = AppartScraper(soup, new_link)
-                appart_scraper.get_base_info()
-                # TODO: add get_all
-                self.appart_dict.update({new_link: appart_scraper.result_dict})
+                if response.status_code == 200:
+                    try: 
+                        soup = BeautifulSoup(response.text, 'html.parser')
+                        appart_scraper = AppartScraper(soup, new_link)
+                        appart_scraper.get_all()
+                        self.appart_dict.update({new_link: appart_scraper.result_dict})
+                        print(f"Got the page: {new_link}")
+                    except Exception as e:
+                        self.failed_links.append(new_link)
+                        print(f"Failed get the data: {new_link}")
+                else:
+                    self.skipped_links.append(new_link)
+                    print(f"Failed to get the page: {new_link}")
+                    print(f"Status code: {response.status_code}")
+                    break
+    
 
         # link_1 = 'https://www.wg-gesucht.de' + self.non_spons_links["0"][0]
         # response_1 =scraper.get_page(link_1)
@@ -89,6 +102,7 @@ class Wg_Controller():
         # ges.update({link_1: dict_1})
         # print(ges)
         self.save_appart_info()
+        
     
     def save_appart_info(self):
         # saving the non_spons_links to a json file

@@ -11,6 +11,7 @@ import os
 class Scraper():
     def __init__(self):
         self.scraper_api_key = self.set_api_param()
+        self.fail_counter = 0
         
     def set_api_param(self):
         config = configparser.ConfigParser()
@@ -28,9 +29,15 @@ class Scraper():
         return response
     
     def get_page(self, url):
-        response = self.get_page_via_direct_call(url)
-        if response.status_code == 200:
-            return response
+        if self.fail_counter < 5:
+            response = self.get_page_via_direct_call(url)
+            if response.status_code == 200:
+                return response
+            else:
+                print('Failed to get the page')
+                self.fail_counter += 1
+                response = self.get_page_via_api(url)
+                return response
         else:
             response = self.get_page_via_api(url)
             return response
