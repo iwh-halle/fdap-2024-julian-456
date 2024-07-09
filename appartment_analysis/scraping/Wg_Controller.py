@@ -1,6 +1,5 @@
 import json
 from bs4 import BeautifulSoup
-
 from scraper import Scraper
 from AppartScraper import AppartScraper
 from LinkScraper import LinkScraper
@@ -58,50 +57,35 @@ class Wg_Controller():
             self.non_spons_links = json.load(json_file)
 
     def get_app_info(self):
-        scraper = Scraper()
-        for page, links in self.non_spons_links.items():
-            if int(page) > 35: # first 35 pages
-                break
-  
-            for link in links:
-                new_link = 'https://www.wg-gesucht.de' + link
-                response = scraper.get_page(new_link)
-                if response.status_code == 200:
-                    try: 
-                        soup = BeautifulSoup(response.text, 'html.parser')
-                        appart_scraper = AppartScraper(soup, new_link)
-                        appart_scraper.get_all()
-                        self.appart_dict.update({new_link: appart_scraper.result_dict})
-                        print(f"Got the page: {new_link}")
-                    except Exception as e:
-                        self.failed_links.append(new_link)
-                        print(f"Failed get the data: {new_link}")
-                else:
-                    self.skipped_links.append(new_link)
-                    print(f"Failed to get the page: {new_link}")
-                    print(f"Status code: {response.status_code}")
+        try:
+            scraper = Scraper()
+            for page, links in self.non_spons_links.items():
+                if int(page) > 54: # first 55 pages
                     break
     
-
-        # link_1 = 'https://www.wg-gesucht.de' + self.non_spons_links["0"][0]
-        # response_1 =scraper.get_page(link_1)
-        # soup_1 = BeautifulSoup(response_1.text, 'html.parser')
-        # appart_scraper = AppartScraper(soup_1, link_1)
-        # appart_scraper.get_icons()
-        # dict_1 = appart_scraper.result_dict
-        # # print(dict_1)
-
-        # link_2 = 'https://www.wg-gesucht.de' + self.non_spons_links["0"][1]
-        # response_2 =scraper.get_page(link_2)
-        # soup_2 = BeautifulSoup(response_2.text, 'html.parser')
-        # appart_scraper = AppartScraper(soup_2, link_2)
-        # appart_scraper.get_icons()
-        # dict_2 = appart_scraper.result_dict
-        # # print(dict_2)
-
-        # ges.update({link_1: dict_1})
-        # print(ges)
-        self.save_appart_info()
+                for link in links:
+                    new_link = 'https://www.wg-gesucht.de' + link
+                    response = scraper.get_page(new_link)
+                    if response.status_code == 200:
+                        try: 
+                            soup = BeautifulSoup(response.text, 'html.parser')
+                            appart_scraper = AppartScraper(soup, new_link)
+                            appart_scraper.get_all()
+                            self.appart_dict.update({new_link: appart_scraper.result_dict})
+                            print(f"Got the page: {new_link}")
+                        except Exception as e:
+                            self.failed_links.append(new_link)
+                            print(f"Failed to get the data: {new_link}")
+                    else:
+                        self.skipped_links.append(new_link)
+                        print(f"Failed to get the page: {new_link}")
+                        print(f"Status code: {response.status_code}")
+                        break
+        except Exception as e:
+            print(f"Error: {e}")
+            print(page, link)
+        finally:
+            self.save_appart_info()
         
     
     def save_appart_info(self):
@@ -109,34 +93,22 @@ class Wg_Controller():
         with open('appartment_analysis\\data\\scraped\\appart_info.json', 'w', encoding='utf-8') as json_file:
             json.dump(self.appart_dict, json_file, ensure_ascii=False, indent=4)
 
-
-
-                
-    
+        with open('appartment_analysis\\data\\scraped\\skipped_links.json', 'w', encoding='utf-8') as json_file:
+            json.dump(self.skipped_links, json_file, ensure_ascii=False, indent=4)
         
-    
+        with open('appartment_analysis\\data\\scraped\\failed_links.json', 'w', encoding='utf-8') as json_file:
+            json.dump(self.failed_links, json_file, ensure_ascii=False, indent=4)
 
 
+# TODO: Remove # 
+# Usage:
 
-# Testing the Wg_Controller()
+# Collecting the links
 # controller = Wg_Controller()
-# scraper = Scraper()
-# link = "https://www.wg-gesucht.de/wg-zimmer-in-Koeln.73.0.1.0.html"
-# response = scraper.get_page_direct(link)
-# soup = BeautifulSoup(response.text, 'html.parser')
-# link_scr = LinkScraper()
-# link_scr.get_non_spons_links(soup)
-# controller.non_spons_links = controller.non_spons_links + link_scr.non_spons_links_pp
-# print(controller.non_spons_links)
+# controller.get_non_spons_links("https://www.wg-gesucht.de/wg-zimmer-in-Koeln.73.0.1.0.html", 0, 55)
 
-#Testing get_non_spons_links
+
+# Collecting the appartment info
 # controller = Wg_Controller()
-# controller.get_non_spons_links("https://www.wg-gesucht.de/wg-zimmer-in-Koeln.73.0.1.0.html", 0, 40)
-# print(controller.non_spons_links)
-# print(len(controller.non_spons_links))
-
-# Testing get_app_info
-controller = Wg_Controller()
-controller.load_non_spons_links()
-# print(controller.non_spons_links)
-controller.get_app_info()
+# controller.load_non_spons_links()
+# controller.get_app_info()

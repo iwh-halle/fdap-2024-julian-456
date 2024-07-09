@@ -219,19 +219,20 @@ class AppartScraper():
         freitext_names_soup = self.soup.find_all('div', class_ = "section_panel_tab")
         for freitext_name in freitext_names_soup:
             freitext_names.append(freitext_name.text.strip())
-        
-        print(freitext_names)
 
+
+        # collect all descriptions
         freitext_desc = []
         # First description is always available and has a different class
         desc_1 = self.soup.find('div', class_ = "wordWrap section_freetext")
-        freitext_desc.append(desc_1.text.strip())
+        freitext_desc.append(desc_1.text.replace('\n', '').replace('\r', '').strip())
 
         # other descriptions have the same class
         freitext_desc_soup = self.soup.find_all('div', class_ = "wordWrap section_freetext display-none")
         for desc in freitext_desc_soup:
             freitext_desc.append(desc.text.replace('\n', '').replace('\r', '').strip())
         
+        # Check if the number of names and descriptions match
         if len(freitext_names) != len(freitext_desc):
             print("The number of descriptions does not match the number of names.")
             freitext_dict = {}
@@ -240,16 +241,7 @@ class AppartScraper():
         
         self.result_dict.update(freitext_dict)
         
-        # freitext_0 = soup.find_all('div', class_ = "section_panel_tab")[0].text.strip()
-        # print(freitext_0)
-        # freitext_1 = soup.find_all('div', class_ = "section_panel_tab")[1].text.strip()
-        # print(freitext_1)
-        # freitext_2 = soup.find_all('div', class_ = "section_panel_tab")[2].text.strip()
-        # print(freitext_2)
-        # freitext_3 = soup.find_all('div', class_ = "section_panel_tab")[3].text.strip()
-        # print(freitext_3)
-        # text_2
-        # zimmer = soup.find('div', id='freitext_0', class_="wordWrap section_freetext").text.strip()
+    
     
     def get_all(self):
         self.get_flatmates()
