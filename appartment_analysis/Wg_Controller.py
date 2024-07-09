@@ -49,12 +49,12 @@ class Wg_Controller():
     
     def save_appart_links(self):
         # saving the non_spons_links to a json file
-        with open('appartment_analysis\\non_spons_links.json', 'w') as json_file:
+        with open('appartment_analysis\\data\\scraped\\non_spons_links.json', 'w') as json_file:
             json.dump(self.non_spons_links, json_file, indent=4)
     
     def load_non_spons_links(self):
         # loading the non_spons_links from a json file
-        with open('appartment_analysis\\non_spons_links.json', 'r') as json_file:
+        with open('appartment_analysis\\data\\scraped\\non_spons_links.json', 'r') as json_file:
             self.non_spons_links = json.load(json_file)
 
     def get_app_info(self):
@@ -106,7 +106,7 @@ class Wg_Controller():
     
     def save_appart_info(self):
         # saving the non_spons_links to a json file
-        with open('appartment_analysis\\appart_info.json', 'w', encoding='utf-8') as json_file:
+        with open('appartment_analysis\\data\\scraped\\appart_info.json', 'w', encoding='utf-8') as json_file:
             json.dump(self.appart_dict, json_file, ensure_ascii=False, indent=4)
 
 
