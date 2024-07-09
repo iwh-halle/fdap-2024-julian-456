@@ -213,6 +213,44 @@ class AppartScraper():
 
         self.result_dict.update(detail_dic)
     
+    def get_freitext(self):
+        freitext_names = []
+        # Not all appartments have the same number of descriptions, so we need to find out how many descriptions (Freitext) are available
+        freitext_names_soup = self.soup.find_all('div', class_ = "section_panel_tab")
+        for freitext_name in freitext_names_soup:
+            freitext_names.append(freitext_name.text.strip())
+        
+        print(freitext_names)
+
+        freitext_desc = []
+        # First description is always available and has a different class
+        desc_1 = self.soup.find('div', class_ = "wordWrap section_freetext")
+        freitext_desc.append(desc_1.text.strip())
+
+        # other descriptions have the same class
+        freitext_desc_soup = self.soup.find_all('div', class_ = "wordWrap section_freetext display-none")
+        for desc in freitext_desc_soup:
+            freitext_desc.append(desc.text.replace('\n', '').replace('\r', '').strip())
+        
+        if len(freitext_names) != len(freitext_desc):
+            print("The number of descriptions does not match the number of names.")
+            freitext_dict = {}
+        else:
+            freitext_dict = dict(zip(freitext_names, freitext_desc))
+        
+        self.result_dict.update(freitext_dict)
+        
+        # freitext_0 = soup.find_all('div', class_ = "section_panel_tab")[0].text.strip()
+        # print(freitext_0)
+        # freitext_1 = soup.find_all('div', class_ = "section_panel_tab")[1].text.strip()
+        # print(freitext_1)
+        # freitext_2 = soup.find_all('div', class_ = "section_panel_tab")[2].text.strip()
+        # print(freitext_2)
+        # freitext_3 = soup.find_all('div', class_ = "section_panel_tab")[3].text.strip()
+        # print(freitext_3)
+        # text_2
+        # zimmer = soup.find('div', id='freitext_0', class_="wordWrap section_freetext").text.strip()
+    
     def get_all(self):
         self.get_flatmates()
         self.get_base_info()
@@ -223,6 +261,7 @@ class AppartScraper():
         self.get_icons()
         self.get_docs()
         self.get_wg_details()
+        self.get_freitext()
 
     
     
@@ -231,11 +270,14 @@ class AppartScraper():
     
     
 
-# url_shared_app = "https://www.wg-gesucht.de/wg-zimmer-in-Koeln-Agnesviertel.8024813.html" 
+# url_shared_app = "https://www.wg-gesucht.de/wg-zimmer-in-Koeln-Nippes.11098319.html"
+# url_shared_app = "https://www.wg-gesucht.de/wg-zimmer-in-Koeln-Lindenthal.6260524.html"
 # response = requests.get(url_shared_app, allow_redirects=False)
 # soup = BeautifulSoup(response.text, 'html.parser')
 
 # test = AppartScraper(soup, url_shared_app)
+# test.get_freitext()
+
 # test.get_flatmates()
 # test.get_base_info()
 # test.get_price()
@@ -246,4 +288,3 @@ class AppartScraper():
 # test.get_docs()
 
 # print(test.result_dict)
-# # test.result_df.head()
