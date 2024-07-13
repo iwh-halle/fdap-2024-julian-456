@@ -35,7 +35,19 @@ The results are presented in the Results folder. First, the literature research 
 All data generated from our scripts are stored in the Data folder, ensuring easy access for further analysis or replication.
 
 ## Getting Started
-
 Interested in conducting your own analysis? Feel free to clone this repository. Begin by installing the necessary dependencies
+
+### Installing Dependencies
+
+
+
+### Setting up API Keys
+```
+[scraperapi]
+key = 1234
+
+[googlemaps]
+key = 5678
+```
 
 # TODO: Vervollständigen

@@ -1,0 +1,15 @@
+numpy
+pandas
+matplotlib
+scikit-learn
+beautifulsoup4
+requests
+jupyterlab
+seaborn
+statsmodels
+googlemaps
+deep_translator
+nltk
+ipykernel
+jupyter
+notebook
