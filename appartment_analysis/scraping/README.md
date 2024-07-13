@@ -65,14 +65,14 @@ For easier data maintenance, the storage format should also be reconsidered. For
 
 
 
-## Data Collection Ethics
-Web scraping always raises ethical questions, as it involves the unsolicited collection of data from users who are not informed about it and therefore have no opportunity to have their data deleted. As a technically savvy person, one could argue that the user must expect this, but this does not apply to the majority of the population. A disclaimer by the site operator warning users about a possible outflow of data to third parties might be helpful here. But there is no such disclaimer. Therefore, there are a few principles we should keep in mind when scraping.
+## Data Scraping Ethics
+Web scraping always raises ethical questions, as it involves the unsolicited collection of data from users who are not informed about it and therefore have no opportunity to have their data deleted. [(Krotov, Johnson, 2020)](http://dx.doi.org/10.17705/1CAIS.04724) As a technically savvy person, one could argue that the user must expect this, but this does not apply to the majority of the population. A disclaimer by the site operator warning users about a possible outflow of data to third parties might be helpful here. But there is no such disclaimer. Therefore, there are a few principles we should keep in mind when scraping.
 
 ### Privacy and Anonymity
 In order to minimize the inconvenience for the user, you should check the consequences, especially when publishing a data set. In order to protect the privacy of users, it is essential to anonymize the data. For example, you should not publish the name and address of a user together, but instead replace the name with a randomly generated code and the address with the zip code. This makes it impossible to draw conclusions about the actual person.
 
 ### Responsibility Towards Website Operators
-In addition to the responsibility towards the users of a website, the responsibility towards the operator of the site must also be taken into account. For example, automated requests should be kept to a necessary minimum so as not to disrupt the normal operation of the server in the form of a DDOS.
+In addition to the responsibility towards the users of a website, the responsibility towards the operator of the site must also be taken into account. For example, automated requests should be kept to a necessary minimum so as not to disrupt the normal operation of the server in the form of a DDOS. [(Merit Data and Technology Pvt Ltd, 2020)](https://www.meritdata-tech.com/resources/blog/data/web-scraping-best-practices-ethical-data-collection/)
 
 ### Conclusion
 However, if the points just described are taken into account, the damage to the users of the site and the operator is negligible. In addition, the data is not used to send advertising or generate profit from it, but is used exclusively for scientific purposes in this project.
