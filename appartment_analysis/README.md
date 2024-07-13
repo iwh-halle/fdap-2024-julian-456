@@ -12,7 +12,7 @@ The case study focuse ads from Cologne provided on [WG-GESUCHT.de](https://www.w
 
 Prior to the web scraping, a literature review was carried out to investigate factors influencing the housing market and the associated prices. The findings from this review are summarized in a dedicated chapter. Relevant literature is briefly described and initial points of reference for the subsequent analysis are derived.
 
-For the duration that an ad remains online, we check the suggestions on the WG-gesucht page to improve the ad. According to the website, ads with the characteristics described here are placed particularly quickly. We therefore use these as possible indicators for relevant influencing factors. 
+For the duration that an ad remains online, we check the suggestions on the WG-GESUCHT page to improve the ad. According to the website, ads with the characteristics described here are placed particularly quickly. We therefore use these as possible indicators for relevant influencing factors. 
 
 The results of the literature research are presented in the Read.me of the results folder.
 
