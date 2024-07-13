@@ -1,4 +1,4 @@
-# Web Scraping for Rental Ads Analysis
+# Web Scraping Shared Appartments of [WG-GESUCHT.de](https://www.wg-gesucht.de/)
 
 ## Scraping Structure
 
