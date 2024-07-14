@@ -31,24 +31,60 @@ Good, expressive images are also helpful, but these could not be included in the
 As already described, the aim of the analysis is to examine whether the residents of a shared apartment have the same expectations of an apartment as the residents of their own apartment or whether there are other factors that determine demand and thus also the price. 
 In the second part, the length of time that a shared flat advertisement remains online will be examined.
 
-For both models, the variables are first described and the model quality is determined. The other results are then presented and placed in a scientific context. 
+For both models, the variables are first described and the model quality is determined. The results on specific factors are then presented and placed in a scientific context. 
 
-Finally, possible extensions are suggested and the findings are summarized
-
-#### Variables
-The price per square meter was used as the dependent variable. Independent variables that would also be related to apartments included the deposit amount, parking facilities, the presence of a garden or balcony, proximity to the City Center and the number of facts from the advertisements. Based on official data from the city of Cologne, the population density could also be included.
-In addition, an exploratory investigation was carried out to determine which price drivers apply specifically to shared flats. For this purpose, a small survey was conducted among friends to collect possible price drivers. Data that could be mapped through the advertisements on WG-GESUCHT.de were also included in the model.
-For this reason, the model also contains information on the length and sentiment of the description. It was assumed that a longer description is associated with a higher rental price because the landlord makes more effort to let the apartment.
-The age limits were also to be examined, whereby a higher required age was also assumed to result in a higher rental price.
-In addition, an ex-Cologne resident described the difference between the two sides of the Rhine. The left bank of the Rhine is said to be more popular than the right bank, which is why higher rents could also apply here.
-Another influencing factor could be whether the apartment is only available for a limited period. The respondents did not agree on how this affects the price.
-The last points are the size of the shared flat or the number of flatmates and whether smoking is allowed in the apartment. According to the respondents, a large number of flatmates should make the rent lower, as should permission to smoke.
-
+Finally, possible extensions are suggested and the findings are summarized.
 
 #### Price Model
+```
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           Price_per_m²   R-squared:                       0.163
+Model:                            OLS   Adj. R-squared:                  0.112
+Method:                 Least Squares   F-statistic:                     3.214
+Date:                Sun, 14 Jul 2024   Prob (F-statistic):           1.03e-05
+Time:                        10:25:52   Log-Likelihood:                -1186.0
+No. Observations:                 334   AIC:                             2412.
+Df Residuals:                     314   BIC:                             2488.
+Df Model:                          19                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================================
+                                        coef    std err          t      P>|t|      [0.025      0.975]
+-----------------------------------------------------------------------------------------------------
+const                                26.4921      5.299      5.000      0.000      16.067      36.917
+WG_Size                              -0.4515      0.416     -1.085      0.279      -1.270       0.367
+Deposit_in_€                          0.0052      0.001      4.887      0.000       0.003       0.007
+Appartmentsize in m²                 -0.0139      0.009     -1.575      0.116      -0.031       0.003
+Intermediate Rent                     2.0111      1.120      1.796      0.073      -0.192       4.214
+left_rhine_side                       1.3566      1.195      1.135      0.257      -0.995       3.708
+Weighted_Average_Sentiment            1.7595      2.402      0.732      0.464      -2.967       6.486
+Min_Age                              -0.0770      0.072     -1.068      0.287      -0.219       0.065
+Max_Age                               0.0511      0.036      1.402      0.162      -0.021       0.123
+Parking                              -0.0687      1.357     -0.051      0.960      -2.739       2.602
+Floor                                -0.3763      0.377     -0.998      0.319      -1.118       0.366
+Garden_Balcony                        1.9091      1.142      1.672      0.096      -0.338       4.156
+Dist_center_in_km                    -0.5667      0.286     -1.984      0.048      -1.129      -0.005
+Title_Length                          0.0035      0.021      0.169      0.866      -0.037       0.044
+Description_Length                -3.824e-05      0.000     -0.095      0.924      -0.001       0.001
+Fact_Count                            0.1881      0.105      1.797      0.073      -0.018       0.394
+Population_per_km²                   -0.0002      0.000     -0.917      0.360      -0.001       0.000
+Smoking_Rauchen nicht erwünscht      -1.8250      1.595     -1.144      0.253      -4.963       1.313
+Smoking_Rauchen teilweise erlaubt    -2.7046      1.603     -1.687      0.093      -5.859       0.450
+Smoking_Rauchen überall erlaubt      -6.8917      3.468     -1.987      0.048     -13.714      -0.069
+==============================================================================
+Omnibus:                        6.803   Durbin-Watson:                   1.988
+Prob(Omnibus):                  0.033   Jarque-Bera (JB):                6.949
+Skew:                           0.352   Prob(JB):                       0.0310
+Kurtosis:                       2.929   Cond. No.                     8.51e+04
+==============================================================================
 
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 8.51e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+```
 ##### Variables
-The price per square meter was used as the dependent variable. Independent variables that would also be related to apartments included the deposit amount, parking facilities, the presence of a garden or balcony, proximity to the City Center and the number of facts from the advertisements. Based on official data from the city of Cologne, the population density could also be included.
+In the first model the price per square meter was used as the dependent variable. Independent variables that would also be related to apartments included the deposit amount, parking facilities, the presence of a garden or balcony, proximity to the City Center and the number of facts from the advertisements. Based on official data from the city of Cologne, the population density could also be included.
 In addition, an exploratory investigation was carried out to determine which price drivers apply specifically to shared flats. For this purpose, a small survey was conducted among friends to collect possible price drivers. Data that could be mapped through the advertisements on WG-GESUCHT.de were also included in the model.
 For this reason, the model also contains information on the length and sentiment of the description. It was assumed that a longer description is associated with a higher rental price because the landlord makes more effort to let the apartment.
 The age limits were also to be examined, whereby a higher required age was also assumed to result in a higher rental price.
@@ -121,26 +157,29 @@ Notes:
 strong multicollinearity or other numerical problems.
 ```
 ##### Variables
-For the most part, the same variables were used to investigate the length of time an advertisement remains online. In this case, the dependent variable was the duration in hours. The price per square meter was included here as an additional influencing variable.
+In the second model mostly the same variables were used to investigate the length of time an advertisement remains online. In this case, the dependent variable was the duration in hours. The price per square meter was included here as an additional influencing variable.
 According to the WG-GESUCHT.de article, apartments are rented out particularly quickly if they contain meaningful descriptions and titles. The type of description can also be an influencing factor here. The relevance of an apartment's location was also emphasized.
 The other variables are included in order to recognize whether certain features or conditions also play a role.
+
 ##### Model quality
 The duration model has an R-squared of 0.074 and an adjusted R-squared of 0.015. This indicates that the independent variables only have a very small influence on the dependent variable. This thesis is confirmed by the F-statistic and its p-value. 
 The F-statistic of 1.244 and the p-value of 0.216 indicate that the model is not significant. 
 A further obstacle is the result of the Durbin Watson test. This indicates a high level of autocorrelation in the original model. In order to strengthen the significance of the predictors, a further regression model was created using Newex-West standard errors. These are robust against autocorrelation, which strengthens the quality of the predictors but does not change the structure of the model itself.
-It was not possible to create a model with a different selection of variables and thus a significant F-statistic. The attempt to use only data sets that existed for at least one week was also unsuccessful.
-Despite the non-significant model, assumptions can be formulated based on the predictors, which can be tested in further analyses if necessary.
+Attempts were also made to to create a model with a different selection of variables and thus a significant F-statistic. But this was not succesfull. The attempt to use only data sets that existed for at least one week was also unsuccessful.
+Despite the non-significant model, assumptions can be formulated based on the predictors, which can be tested in further analyses with a different dataset.
+
 ##### Significant Factors 
 Despite the large number of variables, only 3 variables have a significant influence in the model. The coefficients show that the deposit amount leads to a shared flat having to search longer for a suitable flatmate. This also applies to rentals that are only temporary.
 The length of tenancy is positively influenced by the side of the Rhine. Shared flats on the left bank of the Rhine tend to find a tenant more quickly than those on the right bank.
 As previously mentioned, the model is not significant, which is why the estimators and the associated p-values are not fully meaningful. The results should therefore be checked again with a different data set.
+
 ##### Classification of results
 Even if the model itself is not significant, trends can still be identified. However, these do not match the descriptions of WG-GESUCHT.de. The data set did not confirm that longer descriptions or titles have a positive influence on the length of time an ad is online. 
 
 #### Extensions and Limitations
 Overall, both models show that a longer period of time would be useful for collecting the data. A larger data set would not only increase the significance of the model but also of the individual coefficients. 
 In addition, the results should be compared with other major German cities in order to confirm the validity of the model.
-However, there are also other ways of continuing to work with the current data set. For example, different sub-data could be examined or analyses with other regression models. Regression approaches other than the OLS method could be a useful idea, especially for the investigation of duration
+However, there are also other ways of continuing to work with the current data set. For example, different sub-data could be examined or analyses with other regression models. Regression approaches other than the OLS method could be a useful idea, especially for the investigation of the duration.
 
 #### Summary
 In summary, it can be said that the rents of shared flats are influenced by similar factors as the rents of apartments. For example, proximity to the city center and amenities are definitely relevant. However, there are also other factors, such as the accuracy of the description and whether smoking is permitted. While smoking in most rental apartments is a matter for each tenant to decide for themselves, in a shared apartment the flatmates must adapt accordingly.
