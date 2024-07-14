@@ -1,11 +1,10 @@
-# In Progress
 # Financial Data Analytics with Python: A Case Study on Rental Prices
 
 This part of the repository is a case study that was processed as part of the master module "Financial Data Analytics with Python" at the Martin-Luther-University Halle-Wittenberg. The case study examines factors influencing the rental prices of shared flats. It also examines the factors that affect how long advertisements stay online without finding a suitable flatmate.
 
 ## Overview
 
-The case study focuse ads from Cologne provided on [WG-GESUCHT.de](https://www.wg-gesucht.de/).  Through web scraping, we've compiled ads and various parameters into a dataset, retrieved as of 09.07.2024.  Utilizing Python, Jupyter notebooks and some librarys, we've processed this data to uncover insights into the shared appartment market and compare these with the results on the housing market.
+The case study focuse ads from Cologne provided on [WG-GESUCHT.de](https://www.wg-gesucht.de/).  Web scraping was used to compile ads and various parameters into a data set that was retrieved on 09.07.2024.  Utilizing Python, Jupyter notebooks and some librarys, we've processed this data to uncover insights into the shared appartment market and compare these with the results on the housing market.
 
 
 ### Literature Review
@@ -14,7 +13,7 @@ Prior to the web scraping, a literature review was carried out to investigate fa
 
 For the duration that an ad remains online, we check the suggestions on the WG-GESUCHT page to improve the ad. According to the website, ads with the characteristics described here are placed particularly quickly. We therefore use these as possible indicators for relevant influencing factors. 
 
-The results of the literature research are presented in the Read.me of the results folder.
+The results of the literature research are presented in the Read.me of the "data_analysis" folder.
 
 ### Web Scraping
 
@@ -28,20 +27,21 @@ The preparation of the data can be traced in the "restructuring_data.ipynb" note
 
 ### Results and Discussion
 
-The results are presented in the Results folder. First, the literature research is summarized before the own results are presented. The results are then placed in the economic context and an outlook for future projects is presented.
+The results are also presented in the "data_analysis" folder. First, the literature research is summarized before the own results are presented. The results are then placed in the economic context and an outlook for future projects is presented.
 
 ### Data Repository
 
 All data generated from our scripts are stored in the Data folder, ensuring easy access for further analysis or replication.
 
 ## Getting Started
-Interested in conducting your own analysis? Feel free to clone this repository. Begin by installing the necessary dependencies
+Interested in conducting your own analysis? Feel free to clone this repository. Begin by installing the necessary dependencies. These are listed in a requirements.txt
 
-### Installing Dependencies
+Installing Dependencies:
 
+`pip install -r requirements.txt`
 
+APIs are also used for some scripts. This concerns the ScraperApi for scraping and the GoogleMapsApi for data preparation. To have access to these as well, you must create a separate account for each. You can then create an ini.loc file with the following content: 
 
-### Setting up API Keys
 ```
 [scraperapi]
 key = 1234
@@ -50,4 +50,4 @@ key = 1234
 key = 5678
 ```
 
-# TODO: Vervollständigen
+You must replace the api keys with your own. Add the local.ini file to your Git Ignore file to keep your access code private.
