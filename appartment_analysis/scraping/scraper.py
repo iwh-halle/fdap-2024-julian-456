@@ -32,14 +32,16 @@ class Scraper():
         if self.fail_counter < 5:
             response = self.get_page_via_direct_call(url)
             if response.status_code == 200:
+                print('Got the page via direct call.')
                 return response
             else:
-                print('Failed to get the page')
+                print('Failed to get the page.')
                 self.fail_counter += 1
                 response = self.get_page_via_api(url)
                 return response
         else:
             response = self.get_page_via_api(url)
+            print('Got the page via API.')
             return response
     
     
