@@ -13,7 +13,7 @@ Prior to the web scraping, a literature review was carried out to investigate fa
 
 For the duration that an ad remains online, we check the suggestions on the WG-GESUCHT page to improve the ad. According to the website, ads with the characteristics described here are placed particularly quickly. We therefore use these as possible indicators for relevant influencing factors. 
 
-The results of the literature research are presented in the Read.me of the "[data_analysis](/appartment_analysis/data_analysis/)" folder.
+The results of the literature research are presented in the Read.me of the "[data_analysis](/appartment_analysis/data_analysis/Literture-Review)" folder.
 
 ### Web Scraping
 
