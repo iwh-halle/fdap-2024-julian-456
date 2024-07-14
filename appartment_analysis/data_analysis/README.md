@@ -72,6 +72,7 @@ It is also interesting to compare the assessments with the actual influence of t
 
 
 #### Duration Model
+```
                             OLS Regression Results                            
 ==============================================================================
 Dep. Variable:      Online_since_in_h   R-squared:                       0.074
@@ -118,7 +119,7 @@ Notes:
 [1] Standard Errors are heteroscedasticity and autocorrelation robust (HAC) using 1 lags and without small sample correction
 [2] The condition number is large, 8.82e+04. This might indicate that there are
 strong multicollinearity or other numerical problems.
-
+```
 ##### Variables
 For the most part, the same variables were used to investigate the length of time an advertisement remains online. In this case, the dependent variable was the duration in hours. The price per square meter was included here as an additional influencing variable.
 According to the WG-GESUCHT.de article, apartments are rented out particularly quickly if they contain meaningful descriptions and titles. The type of description can also be an influencing factor here. The relevance of an apartment's location was also emphasized.
