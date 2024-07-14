@@ -46,10 +46,3 @@ class Scraper():
 
     
 
-# Testing the Scraper()
-# test = Scraper()
-# test_response = test.get_page_direct("https://www.wg-gesucht.de/wg-zimmer-in-Koeln.73.0.1.0.html")
-# print(test_response.status_code)
-# test.collect_non_spons_links_from_response(test_response)
-# print(test.non_spons_links)
-# print(len(test.non_spons_links))

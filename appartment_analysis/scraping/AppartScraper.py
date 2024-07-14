@@ -261,22 +261,3 @@ class AppartScraper():
 
     
     
-
-# url_shared_app = "https://www.wg-gesucht.de/wg-zimmer-in-Koeln-Nippes.11098319.html"
-# url_shared_app = "https://www.wg-gesucht.de/wg-zimmer-in-Koeln-Lindenthal.6260524.html"
-# response = requests.get(url_shared_app, allow_redirects=False)
-# soup = BeautifulSoup(response.text, 'html.parser')
-
-# test = AppartScraper(soup, url_shared_app)
-# test.get_freitext()
-
-# test.get_flatmates()
-# test.get_base_info()
-# test.get_price()
-# test.get_address()
-# test.get_availability()
-# test.get_search_info()
-# test.get_icons()
-# test.get_docs()
-
-# print(test.result_dict)

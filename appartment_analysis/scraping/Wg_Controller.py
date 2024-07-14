@@ -100,15 +100,15 @@ class Wg_Controller():
             json.dump(self.failed_links, json_file, ensure_ascii=False, indent=4)
 
 
-# TODO: Remove # 
+
 # Usage:
 
 # Collecting the links
-# controller = Wg_Controller()
-# controller.get_non_spons_links("https://www.wg-gesucht.de/wg-zimmer-in-Koeln.73.0.1.0.html", 0, 55)
+controller = Wg_Controller()
+controller.get_non_spons_links("https://www.wg-gesucht.de/wg-zimmer-in-Koeln.73.0.1.0.html", 0, 55)
 
 
 # Collecting the appartment info
-# controller = Wg_Controller()
-# controller.load_non_spons_links()
-# controller.get_app_info()
+controller = Wg_Controller()
+controller.load_non_spons_links()
+controller.get_app_info()
