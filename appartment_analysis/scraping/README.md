@@ -45,7 +45,7 @@ If errors occur, the incorrectly retrieved links are saved in a separate JSON so
 
 ### Data Collection Results
 
-55 overview pages were retrieved for the case study. These contained 1100 links. (add) X of these could not be retrieved in full. This resulted in a data set with X (add) entries. (See JSON file)
+55 overview pages were retrieved for the case study. These contained 1074 links. 47 of these could not be retrieved in full. This resulted in a data set with 1027 entries. 
 
 
 ## Scraping Over a Longer Period

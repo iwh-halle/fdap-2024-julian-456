@@ -13,28 +13,28 @@ Prior to the web scraping, a literature review was carried out to investigate fa
 
 For the duration that an ad remains online, we check the suggestions on the WG-GESUCHT page to improve the ad. According to the website, ads with the characteristics described here are placed particularly quickly. We therefore use these as possible indicators for relevant influencing factors. 
 
-The results of the literature research are presented in the Read.me of the "[data_analysis](/appartment_analysis/data_analysis#Literture-Review)" folder.
+The results of the literature research are presented in the Read.me of the "[data_analysis](/appartment_analysis/data_analysis)" folder.
 
 ### Web Scraping
 
 The web scraping process is described in the corresponding folder. The structure described here can be used for various other projects. In addition, an outlook is given on how one should adapt the code to retrieve the data over a longer period of time. In addition, the ethical aspects of web scraping are briefly discussed.
-The contents described are in the READNE.md of the "scraping" folder
+The contents described are in the READNE.md of the "[scraping](/appartment_analysis/scraping)" folder.
 
 ### Data Analysis
 
 The data analysis and preparation is explained directly in the code in the respective Jupyter notebook. 
-The preparation of the data can be traced in the "restructuring_data.ipynb" notebook. The data analysis in "data_analysis.ipynb". Both files are located in the "data_analysis" folder.
+The preparation of the data can be traced in the "restructuring_data.ipynb" notebook. The data analysis in "data_analysis.ipynb". Both files are located in the "[data_analysis](/appartment_analysis/data_analysis)" folder.
 
 ### Results and Discussion
 
-The results are also presented in the "data_analysis" folder. First, the literature research is summarized before the own results are presented. The results are then placed in the economic context and an outlook for future projects is presented.
+The results are also presented in the "[data_analysis](/appartment_analysis/data_analysis)" folder. First, the literature research is summarized before the own results are presented. The results are then placed in the economic context and an outlook for future projects is presented.
 
 ### Data Repository
 
 All data generated from our scripts are stored in the Data folder, ensuring easy access for further analysis or replication.
 
 ## Getting Started
-Interested in conducting your own analysis? Feel free to clone this repository. Begin by installing the necessary dependencies. These are listed in a requirements.txt
+Interested in conducting your own analysis? Feel free to clone this repository. Begin by installing the necessary dependencies. These are listed in a requirements.txt.
 
 Installing Dependencies:
 

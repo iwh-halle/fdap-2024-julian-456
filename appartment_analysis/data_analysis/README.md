@@ -72,6 +72,53 @@ It is also interesting to compare the assessments with the actual influence of t
 
 
 #### Duration Model
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:      Online_since_in_h   R-squared:                       0.074
+Model:                            OLS   Adj. R-squared:                  0.015
+Method:                 Least Squares   F-statistic:                     1.244
+Date:                Sun, 14 Jul 2024   Prob (F-statistic):              0.216
+Time:                        10:25:52   Log-Likelihood:                -2336.2
+No. Observations:                 334   AIC:                             4714.
+Df Residuals:                     313   BIC:                             4794.
+Df Model:                          20                                         
+Covariance Type:                  HAC                                         
+=====================================================================================================
+                                        coef    std err          z      P>|z|      [0.025      0.975]
+-----------------------------------------------------------------------------------------------------
+const                               426.5312    182.534      2.337      0.019      68.772     784.291
+Price_per_m²                         -1.0824      1.594     -0.679      0.497      -4.207       2.042
+WG_Size                               0.3192     10.117      0.032      0.975     -19.510      20.149
+Deposit_in_€                          0.0705      0.036      1.976      0.048       0.001       0.141
+Appartmentsize in m²                  0.1777      0.175      1.018      0.309      -0.164       0.520
+Intermediate Rent                   101.0676     38.457      2.628      0.009      25.693     176.442
+left_rhine_side                     -86.7116     37.879     -2.289      0.022    -160.954     -12.470
+Weighted_Average_Sentiment           49.6649     62.784      0.791      0.429     -73.389     172.718
+Min_Age                               0.9705      2.747      0.353      0.724      -4.413       6.354
+Max_Age                               0.4882      1.178      0.414      0.679      -1.822       2.798
+Parking                             -52.9326     42.384     -1.249      0.212    -136.004      30.139
+Floor                                11.6204     10.615      1.095      0.274      -9.184      32.425
+Garden_Balcony                       30.7188     35.735      0.860      0.390     -39.321     100.758
+Dist_center_in_km                    -6.3841      6.852     -0.932      0.351     -19.814       7.046
+Title_Length                         -0.1337      0.586     -0.228      0.820      -1.283       1.015
+Description_Length                   -0.0059      0.010     -0.561      0.575      -0.026       0.015
+Fact_Count                           -3.8066      2.965     -1.284      0.199      -9.619       2.005
+Population_per_km²                   -0.0066      0.005     -1.235      0.217      -0.017       0.004
+Smoking_Rauchen nicht erwünscht     -61.6520     52.367     -1.177      0.239    -164.290      40.986
+Smoking_Rauchen teilweise erlaubt   -36.1921     54.108     -0.669      0.504    -142.241      69.857
+Smoking_Rauchen überall erlaubt     -88.3174     89.772     -0.984      0.325    -264.266      87.632
+==============================================================================
+Omnibus:                       88.199   Durbin-Watson:                   0.195
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              164.733
+Skew:                           1.445   Prob(JB):                     1.69e-36
+Kurtosis:                       4.865   Cond. No.                     8.82e+04
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity and autocorrelation robust (HAC) using 1 lags and without small sample correction
+[2] The condition number is large, 8.82e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
 ##### Variables
 For the most part, the same variables were used to investigate the length of time an advertisement remains online. In this case, the dependent variable was the duration in hours. The price per square meter was included here as an additional influencing variable.
 According to the WG-GESUCHT.de article, apartments are rented out particularly quickly if they contain meaningful descriptions and titles. The type of description can also be an influencing factor here. The relevance of an apartment's location was also emphasized.
